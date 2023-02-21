@@ -118,3 +118,50 @@ cargo build --release
   1. for development(without ```--release```): when we want to rebuild quickly and often.
   2. for building the final program(with ```--release```) to make the runs as fast as possible.
 - For bench marking, run ```cargo build --release```and bench mark with executable in ```target/release```.
+
+## Common programming concepts
+
+### Variables and Mutability
+
+- Variables are immutable by default which make us write code in a way that takes advantage of the safety and easy concurrency the language offers.
+- But, have the option to make variable mutable.
+
+Erroneous code example:
+
+```rust
+fn main() {
+    let x = 5;
+    x = 6; // error, reassignment of immutable variable
+    println!("The value of x is: {x}")
+}
+```
+
+Throws error: ```cannot assign twice to immutable variable x```
+
+- Rust compiler guarantees that when we stat that a value won't change, it really won't change. So, we don't need to track of it ourselves.
+
+- To make the variable mutable use `mut` eg:
+
+```rust
+fn main() {
+    let mut x = 5;
+    x = 6;
+    println!("The value of x is: {x}") 
+}
+```
+
+Output will be: ```The value of x is: 6```
+
+### Constants
+
+- Similar to immutable by defaults but cannot use ```mut``` with them to make it mutable.
+- Declare with ```const``` keyword and type of value must be annotated.
+- Can be declared in any scope. eg. using global scope make them usable for many parts of the code.
+- Constant must set only to a constant expression not the result of a value computed only at runtime.
+- Rust’s naming convention for constants is to use all uppercase with underscores between words.
+
+eg:
+
+```rust
+const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
+```
