@@ -195,4 +195,23 @@ The value of x is: 6
 ```
 
 - By using ```let```, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.
-`
+- With ```let```we are effectively creating a new variable. So, we can change the type of the value but reuse same name.
+eg:
+
+```rust
+fn main() {
+    let spaces = "   ";
+    let spaces = spaces.len();
+}
+```
+
+But, with ```mut```it's not possible to change variable type.
+
+```rust
+fn main() {
+    let mut spaces = "   ";
+    spaces = spaces.len();
+}
+```
+
+Will throw compile-time error: ```error[E0308]: mismatched types```
