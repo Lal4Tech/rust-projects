@@ -165,3 +165,34 @@ eg:
 ```rust
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ```
+
+### Shadowing
+
+We can shadow a variable by using the same variable's name and repeating the use of the ```let``keyword.
+
+eg:
+
+```rust
+fn main() {
+    let x = 5;
+
+    let x = x + 1;
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
+```
+
+output:
+
+```bash
+The value of x in the inner scope is: 12
+The value of x is: 6
+```
+
+- By using ```let```, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.
+`

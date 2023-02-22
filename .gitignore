@@ -1,1 +1,3 @@
-official_tutorials/target/
+official_tutorials/hellow_world/target/**
+official_tutorials/hellow_cargo/target/**
+official_tutorials/variables/target/**
