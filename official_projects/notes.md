@@ -152,7 +152,7 @@ fn main() {
 
 Output will be: ```The value of x is: 6```
 
-### Constants
+#### Constants
 
 - Similar to immutable by defaults but cannot use ```mut``` with them to make it mutable.
 - Declare with ```const``` keyword and type of value must be annotated.
@@ -166,7 +166,7 @@ eg:
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ```
 
-### Shadowing
+#### Shadowing
 
 We can shadow a variable by using the same variable's name and repeating the use of the ```let``keyword.
 
@@ -205,7 +205,7 @@ fn main() {
 }
 ```
 
-But, with ```mut```it's not possible to change variable type.
+But, with ```mut``` it's not possible to change variable type.
 
 ```rust
 fn main() {
@@ -215,3 +215,48 @@ fn main() {
 ```
 
 Will throw compile-time error: ```error[E0308]: mismatched types```
+
+### Data Types
+
+Rust is a statically typed language: means it must know the types of all variables at compile time.
+
+Compiler can usaually infer the datatype based on value. But in case multiple types are possible, we must add a type annotation.
+
+eg:
+
+```rust
+let guess: u32 = "42".parse().expect("Nota a number!");
+```
+
+There are two kind of data types:
+
+- Scalar
+- Compound
+
+#### Scalar
+
+- Represents a single value
+- 4 primary scalar types: integers, floating-point numbers, Booleans and Characters
+
+##### Integer
+
+*Integer types in Rust*:
+<figure>
+  <img src="images/integer_type_in_rust.png" alt="Integer types in rust" width=60% height=60%>
+</figure>
+
+*Integer Literals in Rust*:
+<figure>
+  <img src="images/integer_literals_in_rust.png" alt="Integer literals in rust" width=60% height=60%>
+</figure>
+
+- 
+#### Compound
+
+
+### Functions
+
+### Comments
+
+### Control Flow
+
