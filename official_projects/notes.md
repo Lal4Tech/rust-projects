@@ -250,9 +250,127 @@ There are two kind of data types:
   <img src="images/integer_literals_in_rust.png" alt="Integer literals in rust" width=60% height=60%>
 </figure>
 
-- 
+- When integer overflow offers(eg: change value of a u8 variable to 256), can result in one of two behaviours:
+  - *Panicking*: when compiling in debug mode, Rust includes checks for integer overflow that cause program to panic at run time.
+  - *Two's complement wrapping*: when compiling in release mode with ```release```flag, Rust does not include checks for integer oveflow that cause panics. Instead if overflow happens, Rust performs *two's complement wrapping*. eg: in case of a u8, the value 256 becomes 0, the value 257 becomes 1 and so on.
+- To handle possibility of overflow, following methods can be used:
+  - ```wrapping_*```. eg: ```wrapping_add```
+  - Return ```none```with ```checked_*```methods.
+  - Return boolean(overflow or not) with ```overflowing_*``` methods.
+  - Saturate at the value's min or max values with ```saturating_*```.
+
+##### Floating-Poing Types.
+
+- Two types: ```f32```and ```f64```with default type is ```f64```.
+- All floating-point types are signed.
+
+```rust
+fn main() {
+  let x = 2.0: // f64
+  let y: f32 = 3.0; // f32
+```
+
+##### Numeric Operations
+
+```rust
+fn main() {
+  // addition
+  let sum = 5 + 10;
+
+  // subtraction
+  let difference = 95.5 - 4.3;
+
+  // multiplication
+  let product = 4 * 30;
+
+  // division
+  let quotient = 56.7 / 32.2;
+  let truncated = -5 / 3; // Results in -1
+
+  // remainder
+  let remainder = 43 % 5;
+}
+```
+
+##### Boolean Type
+
+```rust
+fn main() {
+  let t = true;
+
+  let f: bool = false; // with explicit type annotation
+}
+```
+
+##### Char type
+
+```rust
+fn main() {
+  let c = 'z';
+  let z: char = 'ℤ'; // with explicit type annotation
+  let heart_eyed_cat = '😻';
+}
+```
+
+- specify ```char```literals with single quotes as opposed to string literals which use double quotes.
+- ```char```type is four bytes in size.
+
 #### Compound
 
+- Compound types can group multiple values into one type.
+- Rust has two primitive compound types:
+  - *tuples*
+  - *arrays*
+
+##### Tuple type
+
+- Grouping number of values with a variety of types.
+- Have fixed length
+
+eg:
+
+```rust
+fn main() {
+  let tup: (i32, f64, u8) = (500, 6.4, 1);
+
+  let (x, y, z) = tup; // pattern matching to destructure a tuple value
+
+  println!("The value of y is: {y}");
+
+  // access tuple element using index.
+
+  let five_hundred = x.0;
+
+  let six_point_four = x.1;
+
+  let one = x.2;
+}
+```
+
+- A tuple without any values is called ```unit```. Its value and type are written ```()``` represents empty value and empty return type.
+
+##### Array Type
+
+- Collection of multiple values of same type.
+- Have fixed length
+
+```rust
+fn main() {
+  let a: [i32; 5] = [1, 2, 3, 4, 5];
+
+  let first = a[0];
+  let second = a[1];
+}
+```
+
+Initialize array with same values:
+
+```rust
+let a = [3; 5]; // 5 elements with all values initialize to 3
+```
+
+- When we attempt to access an element using indexing, Rust will check that the index specified is less than the array length. If the index is greater than or equal to the length, Rust will panic.
+- In that way Rust provides memory safety by preventing accessing of invalid memory.
 
 ### Functions
 
