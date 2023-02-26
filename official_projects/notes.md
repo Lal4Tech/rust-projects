@@ -374,7 +374,110 @@ let a = [3; 5]; // 5 elements with all values initialize to 3
 
 ### Functions
 
+```rust
+fn main() {
+    println!("Hello, world!");
+
+    another_function();
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+```
+
+#### Parameters
+
+```rust
+fn main() {
+    another_function(5);
+}
+
+fn another_function(x: i32) {
+    println!("The value of x is: {x}");
+}
+```
+
+In function signatures, we must declare the type of each parameter.
+
+Multiple parameters:
+
+```rust
+fn main() {
+    print_labeled_measurement(5, 'h');
+}
+
+fn print_labeled_measurement(value: i32, unit_label: char) {
+    println!("The measurement is: {value}{unit_label}");
+}
+```
+
+#### Statements and Expressions
+
+**Statements** do not return values.
+
+eg:
+
+```rust
+fn main() {
+    let y = 6;
+}
+```
+
+```rust
+fn main() {
+    let x = (let y = 6);
+}
+```
+
+Will get error as statement cannot assign to another variable(here ```let```). ```let y = 6``` statement does not return a value, so there isn't anything for x to bind to.
+
+Contrary to this, **Expressions** evaluate to a value. eg: math operation 5 + 6 is an expression which evaluates to 11. E
+
+- Expressions can be part of statement.
+- Calling a function is an expression.
+- Calling a macro is an expression.
+- A new scope block created with curly brackets is an expression as given in example below.
+
+```rust
+fn main() {
+  let y = {
+    let x = 3;
+    x + 1
+  };
+
+  println!("The value of y is: {y}");
+}
+```
+
+Expressions do not include ending semicolons. eg: ```x + 1``` above. If we add a semicolon to the end of an expression, it will turn it into a statement, and it will then not return a value.
+
+#### Functions with Return Values
+
+- The return value of the function is synonymous with the value of the final expression in the block of the body of a function. But can also reutrn early using ```return``` keyword.
+
+eg: 
+
+```rust
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+
+    println!("The value of x is: {x}");
+}
+```
+
 ### Comments
+
+
 
 ### Control Flow
 
+```rust
+fn main() {
+  // hello, world
+}
+```
