@@ -472,12 +472,66 @@ fn main() {
 
 ### Comments
 
-
-
-### Control Flow
-
 ```rust
 fn main() {
   // hello, world
 }
 ```
+
+### Control Flow
+
+#### if Expressions
+
+```rust
+fn main() {
+    let number = 3;
+
+    if number < 5 {
+        println!("condition was true");
+    } else {
+        println!("condition was false");
+    }
+}
+```
+
+- Condition must be always ```bool``` type.
+- The block of code in the if condition block is called *arm*.
+
+##### Handling Multiple Conditions with else if
+
+```rust
+fn main() {
+    let number = 6;
+
+    if number % 4 == 0 {
+        println!("number is divisible by 4");
+    } else if number % 3 == 0 {
+        println!("number is divisible by 3");
+    } else if number % 2 == 0 {
+        println!("number is divisible by 2");
+    } else {
+        println!("number is not divisible by 4, 3, or 2");
+    }
+}
+```
+
+##### Using if in a let Statement
+
+Because if is an expression, it's possible to use it on the right side of a let statement to assign the outcome to a variable.
+
+```rust
+fn main() {
+    let condition = true;
+    let number = if condition { 5 } else { 6 };
+
+    println!("The value of number is: {number}");
+}
+```
+
+- Values in the both arm should be of same type. It's because,
+  - Blocks of code evaluate to the last expression in them, and numbers by themselves are also expressions.
+  - In this case, the value of the whole if expression depends on which block of code executes.
+  - During the compile time, Rust need to know what type the ```number``` variable is.
+
+
+#### Repetition with Loops  
