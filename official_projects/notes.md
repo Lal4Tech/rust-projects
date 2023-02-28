@@ -535,3 +535,45 @@ fn main() {
 
 
 #### Repetition with Loops  
+
+Rust has three kinds of loops: ```loop```, ```while```, and ```for```.
+
+##### Repeating Code with loop
+
+```loop``` execute its body to run again and again until we stop the program manually.
+
+```rust
+fn main() {
+  loop {
+    println!("again!");
+  }
+}
+```
+
+##### Returning Values from Loops
+
+```rust
+fn main() {
+    let mut counter = 0;
+  
+    let result = loop {
+        counter += 1;
+  
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+    
+    println!("The result is {result}");
+  }
+```
+
+Output:
+
+```bash
+The result is 20
+```
+
+##### Loop Labels to Disambiguate Between Multiple Loops
+
+If there are multiple loops *loop lebel* helps to specify the ```break``` or ```contintue``` apply to which loop.
