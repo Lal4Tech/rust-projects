@@ -533,7 +533,6 @@ fn main() {
   - In this case, the value of the whole if expression depends on which block of code executes.
   - During the compile time, Rust need to know what type the ```number``` variable is.
 
-
 #### Repetition with Loops  
 
 Rust has three kinds of loops: ```loop```, ```while```, and ```for```.
@@ -577,3 +576,102 @@ The result is 20
 ##### Loop Labels to Disambiguate Between Multiple Loops
 
 If there are multiple loops *loop lebel* helps to specify the ```break``` or ```contintue``` apply to which loop.
+
+eg:
+
+```rust
+fn main() {
+    let mut count = 0;
+
+    'counting_up: loop {
+        println!("count = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    println!("End count = {count}");
+}
+```
+
+Output:
+
+```bash
+count = 0
+remaining = 10
+remaining = 9
+count = 1
+remaining = 10
+remaining = 9
+count = 2
+remaining = 10
+End count = 2
+```
+
+##### Conditional Loops with while
+
+eg:
+
+```rust
+fn main() {
+    let mut number = 3;
+
+    while number != 0 {
+        println!("{number}!");
+
+        number -= 1;
+    }
+
+    println!("LIFTOFF!!!");
+}
+```
+
+##### Looping Through a Collection with for
+
+```rust
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+    let mut index = 0;
+
+    while index < 5 {
+        println!("The value is: {}", a[index]);
+
+        index += 1;
+    }
+}
+``` 
+
+- This code would panic if we forgot to update the while condition after re-initializing array with less number of elements for example.
+- It is also slow as compiler adds runtime code to perform the conditional check of whether the index is within the bounds of the array on every loop iteration.
+- More concise way is using ```for``` loop.
+
+```rust
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a {
+        println!("The values is: {element}");
+    }
+}
+```
+
+Modification of aforementioned while loop to make it more "Rustian":
+
+```rust
+fn main() {
+    for number in (1..4).rev() {
+        println!("{number}!");
+    }
+    println!("LIFTOFF!!!");
+}
+```
