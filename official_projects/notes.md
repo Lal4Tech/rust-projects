@@ -675,3 +675,24 @@ fn main() {
     println!("LIFTOFF!!!");
 }
 ```
+
+## Project: Guessing Game
+
+[Source code](guessing_game/src/main.rs)
+
+To bring the io input/output library into scope
+
+```rust
+use std::io;
+```
+
+The io library comes from the standard library, known as ```std```.
+
+**Prelude**:
+
+The set of items which are defined in the standard library that Rust brings into the scope of every program.
+
+If the required type is not in the prelude, we have to bring that type into scope explicitly with a ```use``` statement.
+
+
+
