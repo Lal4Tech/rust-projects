@@ -690,9 +690,68 @@ The io library comes from the standard library, known as ```std```.
 
 **Prelude**:
 
-The set of items which are defined in the standard library that Rust brings into the scope of every program.
+- The set of items which are defined in the standard library that Rust brings into the scope of every program.
 
-If the required type is not in the prelude, we have to bring that type into scope explicitly with a ```use``` statement.
+- If the required type is not in the prelude, we have to bring that type into scope explicitly with a ```use``` statement.
 
+**Mutable variable**:
 
+```rust
+let mut guess = String::new();
+```
 
+- ```String```: a type provided by standard library that is a growable, UTF-8 encoded bit of text
+- ```::``` indicates that ```new```is an associated function(a function implemented on a type) of the ```String```type(in this case).
+- ```new``function creates a new, empty string here.
+- ```String::new``` function that returns a new instance of ```String```
+
+So, the whole code line, creating a mutable variable that is currently bound to a new, empty instance of a String.
+
+**Receiving User input**:
+
+```rust
+io::stdin()
+    .read_line(&mut guess)
+```
+
+- ```std::io::stdin()``` returns an instance of ```std::io::Stdin```, a type that represents a handle to the standard input from command line.
+- ```.read_line(&mut guess)```: calls the ```read_line```method on the standard input handle to get input from the user.
+- ```&mut guess``` is for telling to what variable the user input should be stored.
+- ```&``` indicates that this argument is a *reference*. A way to let multiple parts of the code access once piece of data, avoiding the need to copy data into memory multiple times.
+- *references* are immutable by default. So, to make it mutable we have to write ```&mut guess```rather than ```&guess```.
+- The full job of read_line is to take whatever the user types into standard input and append that into a string (without overwriting its contents)
+
+**Handling Potential Failure with Result**:
+
+```rust
+.expect("Failed to read line");
+```
+
+- ```read_line``` puts whatever the inputs to string we pass to it, but it also returns a ```Result``` value.
+- ```Result```is an enum with two possible variants ```ok```and ```err```(Enum(enumeration) which can have multiple possible states called variants).
+- ```ok```: indicates operation was successful.
+- ```err```: indicates operation failed.
+- An instance of ```Result```has an ```expect``` method.
+- If the instance of ```Result```is an ```Err``` value, ```expect```will cause the program to crash and display the message we passed using ```expect```.
+- If the instance of ```Result```is an ```ok```value, ```expect``` will take the return value that ```ok```is holding and return just that value(in this case, the number of bytes in the user's input) for further use.
+
+**Printing Values with println! Placeholders**:
+
+```rust
+println!("You guessed: {guess}");
+```
+
+- ```{}```: placeholder
+
+```rust
+let x = 5;
+let y = 10;
+
+println!("x = {x} and y + 2 = {}", y + 2);
+```
+
+Output:
+
+```bash
+x = 5 and y = 12
+```
