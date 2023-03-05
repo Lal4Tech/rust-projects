@@ -755,3 +755,30 @@ Output:
 ```bash
 x = 5 and y = 12
 ```
+
+**Generating a Secret Number**:
+
+- *Crate* is a collection of Rust source code files.
+- ```rand``` [crate](https://crates.io/crates/rand) is a *library crate* which cannot be executed on its own, instead to be used in other programs.
+
+*Cargo.toml*
+
+```bash
+[dependencies]
+rand = "0.8.5"
+```
+
+After adding the above build project using ```cargo build```.
+
+**Ensuring Reproducible Builds with the Cargo.lock File**:
+
+- When we build a project for the first time, Cargo figures out all the versions of the dependencies that fit the criteria and then writes them to the *Cargo.lock* file.
+- When we build project in future, Cargo will see that the Cargo.lock file exists and will use the versions specified there. 
+- This lets us have a reproducible build automatically.
+
+**Updating a Crate to Get a New Version**:
+
+```cargo update```will ignore *Cargo.lock* file and use all the latest versions specified in *Cargo.toml* and write all those versions to *Cargo.lock* file.
+
+
+
