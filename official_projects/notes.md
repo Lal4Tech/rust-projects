@@ -780,5 +780,70 @@ After adding the above build project using ```cargo build```.
 
 ```cargo update```will ignore *Cargo.lock* file and use all the latest versions specified in *Cargo.toml* and write all those versions to *Cargo.lock* file.
 
+**Generating a Random Number**:
 
+```rust
+use std::io;
+use rand::Rng;
 
+fn main() {
+    println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    println!("The secret number is: {secret_number}");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    println!("You guessed: {guess}");
+}
+```
+
+- ```use rand::Rng;```
+  - ```Rng``` trait defines methods that random number generators implement.
+  - This train must in the scope to use those methods.
+- ```rand::thread_rng()``` gives random number generator.
+- Then call the ```gen_range()``` method on that generator. This method is defined by ```Rng``` trait.  
+
+**Comparing the guess to the secret number**:
+
+```rust
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    // --snip--
+
+    println!("You guessed: {guess}");
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+}
+```
+
+- The Ordering type is another enum and has the variants ```Less```, ```Greater```, and ```Equal```.
+- ```cmp``` method compare two values and returns a variant of the ```Ordering``` enum.
+- ```match```expression is used to decide what to do next based on which variant of ```Ordering``` was returned from the call to cmp with the values in guess and secret_number.
+- A ```match``` expression is made up of *arms*. An arm consists of:
+  - a pattern to match against
+  - and the code that should be run if the value given to match fits that arm’s pattern.
+  - The ```match``` expression ends after the first successful match, so it won’t look at the last arm in this scenario.
+
+Converting variable to another type by *shadowing*:
+
+```rust
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
+```
+
+- The ```parse``` method on strings converts a string to another type.
+- ```parse``` method returns a ```Result``` type(enum). Upon error it will give ```err``` variant cause the program exit with the error message given using ```expect```. Upon success it will return ```ok``` variant of Result and expect will return the number.
