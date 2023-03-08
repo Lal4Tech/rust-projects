@@ -847,3 +847,56 @@ let guess: u32 = guess.trim().parse().expect("Please type a number!");
 
 - The ```parse``` method on strings converts a string to another type.
 - ```parse``` method returns a ```Result``` type(enum). Upon error it will give ```err``` variant cause the program exit with the error message given using ```expect```. Upon success it will return ```ok``` variant of Result and expect will return the number.
+
+**Allowing Multiple Guesses with Looping With Quiting after correct input**:
+
+```rust
+println!("The secret number is: {secret_number}");
+
+loop {
+    println!("Please input your guess.");
+
+    // --snip--
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => {
+            println!("You win!");
+            break;
+        }
+    }
+}
+```
+
+**Handling Invalid Input**:
+
+```rust
+// --snip--
+
+io::stdin()
+    .read_line(&mut guess)
+    .expect("Failed to read line");
+
+let guess: u32 = match guess.trim().parse() {
+    Ok(num) => num,
+    Err(_) => continue,
+};
+
+println!("You guessed: {guess}");
+
+// --snip--
+```
+
+If ```pars``` is able to successfully turn the string into a number:
+
+- it will return an ```Ok``` value that contains the resultant number.
+- That ```Ok``` value will match the first arm's pattern
+- and the ```match``` expression will just return the num value that parse produced and put inside the Ok value.
+
+If ```parse``` is not able to turn the string into a number:
+
+- It will return an```Err``` value that contains more information about the error.
+- underscore(```_```) is a`catchall value, represents what ever value inside ```Err```.
+
+
